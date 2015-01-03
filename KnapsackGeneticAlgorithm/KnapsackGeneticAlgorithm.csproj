@@ -50,7 +50,7 @@
     <Compile Include="Selection\Strategies\RouletteWheelStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KnapsackContract\KnapsackContract.csproj">
+    <ProjectReference Include="..\KnapsackContract\KnapsackContract.csproj">
       <Project>{4b595a11-35c2-4d7f-bcd1-0b9da6641be9}</Project>
       <Name>KnapsackContract</Name>
     </ProjectReference>

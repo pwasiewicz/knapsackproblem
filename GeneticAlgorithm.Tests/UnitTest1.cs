@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace GeneticAlgorithm.Tests
+﻿namespace GeneticAlgorithm.Tests
 {
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using KnapsackContract;
     using KnapsackGeneticAlgorithm;
 
