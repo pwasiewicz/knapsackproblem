@@ -1,14 +1,14 @@
 ﻿namespace KnapsackGeneticAlgorithm
 {
-    using System;
     using KnapsackContract;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
     using KnapsackGeneticAlgorithm.Crossovering.Crossovers;
     using KnapsackGeneticAlgorithm.Mutating;
     using KnapsackGeneticAlgorithm.Mutating.Strategies;
     using KnapsackGeneticAlgorithm.Selection.Strategies;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
 
     public class GeneticAlgorithm : IKnapsackSolver
     {
@@ -93,8 +93,8 @@
                     childPopulation.Add(child);
                 }
 
-                populatingEnd = currentGeneration > this.maxGenerations
-                                            || (result = this.FitnessesEnough()) != null;
+                populatingEnd = currentGeneration > this.maxGenerations;
+                                            //|| (result = this.FitnessesEnough()) != null;
                 if (populatingEnd)
                 {
                     continue;
@@ -128,12 +128,16 @@
 
         private void EvaluteFitness()
         {
-            this.currentPopulation.ForEach(chromosome => chromosome.EnsureFitness());
+            for (var i = 0; i < this.currentPopulation.Count; i++)
+            {
+                this.currentPopulation[i].EnsureFitness();
+            }
         }
 
         private void PerformElitism(List<Chromosome> target)
         {
-            target.AddRange(this.currentPopulation.OrderByDescending(chr => chr.TotalCost).Take(2));
+            var ordered = this.currentPopulation.OrderByDescending(chr => chr.TotalCost);
+            target.AddRange(ordered.Take(2));
         }
 
         private void Mutate(IMutationStrategy mutationStrategy, Chromosome chromosome)

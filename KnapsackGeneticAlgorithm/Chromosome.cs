@@ -67,12 +67,8 @@
 
         public void EnsureFitness()
         {
-            var exceedsLimit = true;
-
-            while (exceedsLimit)
+            while (true)
             {
-                exceedsLimit = false;
-
                 this.lastTotalCost = 0;
                 this.lastTotalWeight = 0;
 
@@ -87,9 +83,9 @@
                     this.lastTotalWeight += this.knapsackConfiguration.Items[i].Weight;
                 }
 
-                if (!(this.lastTotalWeight > this.knapsackConfiguration.KnapsackVolume))
+                if (this.lastTotalWeight <= this.knapsackConfiguration.KnapsackVolume)
                 {
-                    continue;
+                    break;
                 }
 
                 var choosenItems =
@@ -99,8 +95,6 @@
 
                 var indexToExclude = RandomGenerator.Next(0, choosenItems.Length);
                 this.itemsIncludedInKnapsack[choosenItems[indexToExclude]] = false;
-
-                exceedsLimit = true;
             }
         }
 
