@@ -31,7 +31,9 @@
         {
             this.knapsackConfiguration = chromosome.knapsackConfiguration;
             this.itemsSize = chromosome.itemsSize;
-            this.itemsIncludedInKnapsack = chromosome.itemsIncludedInKnapsack;
+
+            this.itemsIncludedInKnapsack = new bool[chromosome.itemsIncludedInKnapsack.Length];
+            chromosome.itemsIncludedInKnapsack.CopyTo(this.itemsIncludedInKnapsack,0);
         }
 
         public bool[] Items

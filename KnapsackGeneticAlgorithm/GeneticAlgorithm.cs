@@ -93,8 +93,8 @@
                     childPopulation.Add(child);
                 }
 
-                populatingEnd = currentGeneration > this.maxGenerations;
-                                            //|| (result = this.FitnessesEnough()) != null;
+                populatingEnd = currentGeneration > this.maxGenerations
+                                            || (result = this.FitnessesEnough()) != null;
                 if (populatingEnd)
                 {
                     continue;
