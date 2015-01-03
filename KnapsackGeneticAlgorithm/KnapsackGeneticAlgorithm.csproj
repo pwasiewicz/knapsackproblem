@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1FD58BAD-C24E-4F60-9A99-B6B8C7816FBD}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{AD2D4CE6-5E76-4431-AEBC-1C26447530DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KnapsackProblem</RootNamespace>
-    <AssemblyName>KnapsackProblem</AssemblyName>
+    <RootNamespace>KnapsackGeneticAlgorithm</RootNamespace>
+    <AssemblyName>KnapsackGeneticAlgorithm</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,10 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chromosome.cs" />
+    <Compile Include="Crossovering\Crossovers\SinglePointCrossover.cs" />
+    <Compile Include="Crossovering\ICrossover.cs" />
+    <Compile Include="GeneticAlgorithm.cs" />
+    <Compile Include="Mutating\IMutationStrategy.cs" />
+    <Compile Include="Mutating\Strategies\SimpleMutationStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selection\ISelectionStrategy.cs" />
+    <Compile Include="Selection\Strategies\RouletteWheelStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\..\KnapsackContract\KnapsackContract.csproj">
+      <Project>{4b595a11-35c2-4d7f-bcd1-0b9da6641be9}</Project>
+      <Name>KnapsackContract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
