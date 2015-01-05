@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticAlgorithm.Tests", "G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackContract", "KnapsackContract\KnapsackContract.csproj", "{4B595A11-35C2-4D7F-BCD1-0B9DA6641BE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabuAlgorithm", "TabuAlgorithm\TabuAlgorithm.csproj", "{DBEBD86A-60AF-41D8-8A4D-1459DEF111B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{4B595A11-35C2-4D7F-BCD1-0B9DA6641BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B595A11-35C2-4D7F-BCD1-0B9DA6641BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B595A11-35C2-4D7F-BCD1-0B9DA6641BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBEBD86A-60AF-41D8-8A4D-1459DEF111B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEBD86A-60AF-41D8-8A4D-1459DEF111B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBEBD86A-60AF-41D8-8A4D-1459DEF111B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBEBD86A-60AF-41D8-8A4D-1459DEF111B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +50,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AD2D4CE6-5E76-4431-AEBC-1C26447530DC} = {188FBE21-C9D5-474F-B9EE-C49EF3B6719A}
 		{81CD01DA-6B9E-4B60-A0A3-8C7E4A06E735} = {D5797225-8799-4CEA-8489-F17BCC7A8DEE}
+		{DBEBD86A-60AF-41D8-8A4D-1459DEF111B7} = {188FBE21-C9D5-474F-B9EE-C49EF3B6719A}
 	EndGlobalSection
 EndGlobal
