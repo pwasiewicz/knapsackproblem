@@ -1,5 +1,6 @@
 ﻿namespace TabuAlgorithm
 {
+    using System.IO;
     using KnapsackContract;
 
     public class TabuAlgorithmFactory : IKnapsackSolverFactory
@@ -8,7 +9,7 @@
         {
             get { return "tabu"; }
         }
-        public IKnapsackSolver Create(params string[] args)
+        public IKnapsackSolver Create(TextWriter outWriter, params string[] args)
         {
             return new TabuAlgorithm();
         }

@@ -20,7 +20,6 @@
                                     {
                                         settings.HelpWriter = null;
                                         settings.IgnoreUnknownArguments = true;
-                                        settings.MutuallyExclusive = true;
                                     });
 
             parser.ParseArgumentsStrict(args, programArgs, () =>
@@ -39,7 +38,7 @@
                     Environment.Exit(2);
                 }
 
-                var solver = solverFactory.Create(args);
+                var solver = solverFactory.Create(Console.Out, args);
                 // TODO solver
             }
 

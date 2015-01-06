@@ -1,6 +1,10 @@
 ﻿namespace KnapsackGeneticAlgorithm
 {
+    using System;
+    using System.IO;
+    using CommandLine;
     using KnapsackContract;
+    using KnapsackGeneticAlgorithm.Arguments;
 
     public class GeneticAlgorithmFactory : IKnapsackSolverFactory
     {
@@ -9,9 +13,23 @@
             get { return "genetic"; }
         }
 
-        public IKnapsackSolver Create(params string[] args)
+        public IKnapsackSolver Create(TextWriter outWriter, params string[] args)
         {
-            return new GeneticAlgorithm(1000, 100, 0.2);
+            var algArgs = new AlgArguments();
+            var parser = new Parser(cfg =>
+                                    {
+                                        cfg.HelpWriter = null;
+                                        cfg.IgnoreUnknownArguments = true;
+                                    });
+
+            parser.ParseArgumentsStrict(args, algArgs, () =>
+                                                       {
+                                                           outWriter.WriteLine("Invalid arguments for genetic algorithm");
+                                                           Environment.Exit(4);
+                                                       });
+
+
+            return new GeneticAlgorithm(algArgs.Generations, algArgs.Population, algArgs.MutationProbability);
         }
     }
 }
