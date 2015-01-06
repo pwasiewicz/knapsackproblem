@@ -9,5 +9,8 @@
 
         [Option('a', "algorithm", Required = true)]
         public string AlgorithmName { get; set; }
+
+        [Option('f', "file")]
+        public string File { get; set; }
     }
 }

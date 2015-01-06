@@ -19,6 +19,7 @@
                   .PerLifetimeScope();
 
             cntBld.Register<FactoryResolver>().PerLifetimeScope();
+            cntBld.Register<ResultWriter>().PerLifetimeScope();
         }
     }
 }

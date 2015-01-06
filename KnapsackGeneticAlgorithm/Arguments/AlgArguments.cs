@@ -11,6 +11,6 @@
         public int Population { get; set; }
 
         [Option('m', "mutation", DefaultValue = 0.1)]
-        public float MutationProbability { get; set; }
+        public double MutationProbability { get; set; }
     }
 }

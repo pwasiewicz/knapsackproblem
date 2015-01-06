@@ -1,7 +1,5 @@
 ﻿namespace KnapsackProblem
 {
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using CommandLine;
     using KnapsackProblem.Arguments;
     using System;
@@ -39,7 +37,15 @@
                 }
 
                 var solver = solverFactory.Create(Console.Out, args);
-                // TODO solver
+
+                var confReader = new KnapsackReader(programArgs.File);
+                var knapsackConfiguration = confReader.ReadConfiguration();
+
+                solver.Init(knapsackConfiguration);
+                var solution = solver.Solve();
+
+                var resultWriter = lifetimeScope.Resolve<ResultWriter>();
+                resultWriter.Write(Console.Out, solution);
             }
 
 
