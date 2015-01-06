@@ -20,6 +20,7 @@
             }
 
             length = array.Length;
+
             while (index < length)
             {
                 Buffer.BlockCopy(array, 0, array, index, Math.Min(block, length - index));

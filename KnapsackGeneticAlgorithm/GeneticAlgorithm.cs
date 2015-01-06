@@ -7,7 +7,6 @@
     using KnapsackGeneticAlgorithm.Selection.Strategies;
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
 
     public class GeneticAlgorithm : IKnapsackSolver
@@ -40,26 +39,27 @@
             this.mutationProbability = mutationProbability;
         }
 
-        public void Init(KnapsackConfiguration configuration)
+        public void Init(KnapsackConfiguration conf)
         {
+            this.configuration = conf;
             this.currentPopulation = new List<Chromosome>();
+
             for (var i = 0; i < this.populationCount; i++)
             {
-                this.currentPopulation.Add(new Chromosome(configuration));
+                this.currentPopulation.Add(new Chromosome(this.configuration));
             }
-
-            this.configuration = configuration;
         }
 
         public KnapsackItem[] Solve()
         {
             var result = this.DoWork();
 
-            return this.configuration.Items.Zip(result.Items, (item, b) => new
-                                                                           {
-                                                                               Item = item,
-                                                                               IsInKnapsack = b
-                                                                           })
+            return this.configuration.Items
+                       .Zip(result.Items, (item, isInKnapsack) => new
+                                                                  {
+                                                                      Item = item,
+                                                                      IsInKnapsack = isInKnapsack
+                                                                  })
                        .Where(item => item.IsInKnapsack)
                        .Select(item => item.Item)
                        .ToArray();
@@ -100,9 +100,6 @@
                     continue;
                 }
 
-                Debug.Assert(this.currentPopulation.Count == childPopulation.Count,
-                             "this.currentPopulation.Count == childPopulation.Count");
-
                 this.currentPopulation = childPopulation;
                 currentGeneration += 1;
             }
@@ -110,7 +107,7 @@
             return result ?? this.FitnessesEnough(resultOnly: true);
         }
 
-        private Chromosome FitnessesEnough(bool resultOnly= false)
+        private Chromosome FitnessesEnough(bool resultOnly = false)
         {
             if (resultOnly)
             {
@@ -118,19 +115,20 @@
             }
 
             var fitnesses =
-                this.currentPopulation.GroupBy(chromosome => chromosome.TotalCost)
+                this.currentPopulation
+                    .GroupBy(chromosome => chromosome.TotalCost)
                     .OrderByDescending(group => group.Count())
                     .First();
 
-            var isEnd= (double) fitnesses.Count()/this.populationCount >= PercentageOfPopulationThatEndsSearching;
+            var isEnd = (double) fitnesses.Count()/this.populationCount >= PercentageOfPopulationThatEndsSearching;
             return isEnd ? fitnesses.First() : null;
         }
 
         private void EvaluteFitness()
         {
-            for (var i = 0; i < this.currentPopulation.Count; i++)
+            foreach (var chromosome in this.currentPopulation)
             {
-                this.currentPopulation[i].EnsureFitness();
+                chromosome.EnsureFitness();
             }
         }
 

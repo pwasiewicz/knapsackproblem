@@ -1,8 +1,8 @@
 ﻿namespace KnapsackGeneticAlgorithm
 {
+    using KnapsackContract;
     using System;
     using System.Linq;
-    using KnapsackContract;
 
     internal class Chromosome
     {

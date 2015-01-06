@@ -2,7 +2,7 @@
 {
     public interface IKnapsackSolver
     {
-        void Init(KnapsackConfiguration configuration);
+        void Init(KnapsackConfiguration conf);
 
         KnapsackItem[] Solve();
     }
