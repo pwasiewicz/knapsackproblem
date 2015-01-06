@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IKnapsackSolver.cs" />
+    <Compile Include="IKnapsackSolverFactory.cs" />
     <Compile Include="KnapsackConfiguration.cs" />
     <Compile Include="KnapsackItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

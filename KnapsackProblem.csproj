@@ -35,6 +35,9 @@
     <Reference Include="CommandLine">
       <HintPath>packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
     </Reference>
+    <Reference Include="MiniAutFac">
+      <HintPath>packages\MiniAutFac.1.3.0\lib\portable-net45+sl50+win+wpa81+wp80\MiniAutFac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,8 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguments\ProgramArgs.cs" />
+    <Compile Include="IoC\IoCRegistration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FactoryResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -56,6 +61,14 @@
     <ProjectReference Include="KnapsackContract\KnapsackContract.csproj">
       <Project>{4b595a11-35c2-4d7f-bcd1-0b9da6641be9}</Project>
       <Name>KnapsackContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="KnapsackGeneticAlgorithm\KnapsackGeneticAlgorithm.csproj">
+      <Project>{ad2d4ce6-5e76-4431-aebc-1c26447530dc}</Project>
+      <Name>KnapsackGeneticAlgorithm</Name>
+    </ProjectReference>
+    <ProjectReference Include="TabuAlgorithm\TabuAlgorithm.csproj">
+      <Project>{dbebd86a-60af-41d8-8a4d-1459def111b7}</Project>
+      <Name>TabuAlgorithm</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

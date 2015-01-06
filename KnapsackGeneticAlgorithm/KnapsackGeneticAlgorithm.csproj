@@ -43,6 +43,7 @@
     <Compile Include="Crossovering\Crossovers\SinglePointCrossover.cs" />
     <Compile Include="Crossovering\ICrossover.cs" />
     <Compile Include="GeneticAlgorithm.cs" />
+    <Compile Include="GeneticAlgorithmFactory.cs" />
     <Compile Include="Mutating\IMutationStrategy.cs" />
     <Compile Include="Mutating\Strategies\SimpleMutationStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

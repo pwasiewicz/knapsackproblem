@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TabuAlgorithm.cs" />
+    <Compile Include="TabuAlgorithmFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KnapsackContract\KnapsackContract.csproj">
