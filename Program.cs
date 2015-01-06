@@ -2,11 +2,11 @@
 {
     using CommandLine;
     using KnapsackProblem.Arguments;
-    using System;
     using KnapsackProblem.IoC;
     using KnapsackProblem.Services;
     using MiniAutFac;
     using MiniAutFac.Interfaces;
+    using System;
 
     public class Program
     {
@@ -47,7 +47,6 @@
                 var resultWriter = lifetimeScope.Resolve<ResultWriter>();
                 resultWriter.Write(Console.Out, solution);
             }
-
 
             if (programArgs.WaitForKey)
             {
