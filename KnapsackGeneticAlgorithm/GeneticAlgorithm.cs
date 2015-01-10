@@ -52,6 +52,11 @@
 
         public KnapsackItem[] Solve()
         {
+            if (this.configuration == null)
+            {
+                throw new InvalidOperationException("Algorithm must be inited first.");
+            }
+
             var result = this.DoWork();
 
             return this.configuration.Items

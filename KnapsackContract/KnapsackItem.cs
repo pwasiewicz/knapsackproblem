@@ -2,8 +2,14 @@
 {
     public class KnapsackItem
     {
-        public int Weight { get; set; }
+        public KnapsackItem(int weight, int cost)
+        {
+            this.Weight = weight;
+            this.Cost = cost;
+        }
 
-        public int Cost { get; set; }
+        public int Weight { get; private set; }
+
+        public int Cost { get; private set; }
     }
 }

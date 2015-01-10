@@ -11,7 +11,7 @@
         }
         public IKnapsackSolver Create(TextWriter outWriter, params string[] args)
         {
-            return new TabuAlgorithm();
+            return new TabuAlgorithm(10);
         }
     }
 }

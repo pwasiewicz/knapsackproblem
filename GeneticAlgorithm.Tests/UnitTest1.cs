@@ -13,68 +13,20 @@
         {
             var testMethod = new GeneticAlgorithm(10000, 30, 0.1);
 
-            testMethod.Init(new KnapsackConfiguration
-                            {
-                                KnapsackVolume = 20,
-                                Items = new KnapsackItem[]
-                                        {
-                                            new KnapsackItem
-                                            {
-                                                Cost = 3,
-                                                Weight = 2
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 10,
-                                                Weight = 5
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 3,
-                                                Weight = 1
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 30,
-                                                Weight = 10
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 10,
-                                                Weight = 7
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 1,
-                                                Weight = 15
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 8,
-                                                Weight = 5
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 4,
-                                                Weight = 6
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 6,
-                                                Weight = 4
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 7,
-                                                Weight = 8
-                                            },
-                                            new KnapsackItem
-                                            {
-                                                Cost = 9,
-                                                Weight = 3
-                                            }
-                                        }
-                            });
+            testMethod.Init(new KnapsackConfiguration(new[]
+                                                      {
+                                                          new KnapsackItem(2, 3),
+                                                          new KnapsackItem(6, 10),
+                                                          new KnapsackItem(1, 3),
+                                                          new KnapsackItem(10, 30),
+                                                          new KnapsackItem(7, 10),
+                                                          new KnapsackItem(15, 1),
+                                                          new KnapsackItem(5, 8),
+                                                          new KnapsackItem(6, 4),
+                                                          new KnapsackItem(4, 8),
+                                                          new KnapsackItem(8, 7),
+                                                          new KnapsackItem(3, 9)
+                                                      }, 20));
 
             var result = testMethod.Solve();
         }

@@ -2,8 +2,19 @@
 {
     public class KnapsackConfiguration
     {
-        public KnapsackItem[] Items { get; set; }
+        public KnapsackConfiguration(KnapsackItem[] items, int volume)
+        {
+            this.Items = items;
+            this.KnapsackVolume = volume;
+        }
 
-        public double KnapsackVolume { get; set; }
+        public KnapsackItem[] Items { get; private set; }
+
+        public int KnapsackVolume { get; private set; }
+
+        public int ItemsLength
+        {
+            get { return this.Items.Length; }
+        }
     }
 }
