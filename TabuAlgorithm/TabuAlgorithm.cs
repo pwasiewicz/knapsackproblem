@@ -51,6 +51,8 @@
 
                 this.bestSolution.CreatedFrom = null;
 
+                neighbourhoods.ForEach(tabuElement => tabuElement.EnsureFitness());
+
                 foreach (var ngh in neighbourhoods.Where(ngh => ngh.TotalCost > this.bestSolution.TotalCost))
                 {
                     this.bestSolution = ngh;
