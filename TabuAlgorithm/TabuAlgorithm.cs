@@ -9,21 +9,22 @@
     {
         private readonly  static Random Random = new Random();
 
-        private Queue<KnapsackItem> tabu;
+        private Queue<TabuMove> tabu;
         private KnapsackConfiguration configuration;
         private TabuElement bestSolution;
 
         private readonly int tabuSize;
+        private readonly int neighbourhoods;
         private readonly int maxIterations;
 
-        public TabuAlgorithm(int tabuSize, int maxIterations)
+        public TabuAlgorithm(int tabuSize, int maxIterations, int neighbourhoods)
         {
             this.tabuSize = tabuSize;
             this.maxIterations = maxIterations;
+            this.neighbourhoods = neighbourhoods;
 
-            this.tabu = new Queue<KnapsackItem>(this.tabuSize);
+            this.tabu = new Queue<TabuMove>(this.tabuSize);
         }
-
 
         public void Init(KnapsackConfiguration conf)
         {
@@ -46,6 +47,23 @@
                 if (!neighbourhoods.Any())
                 {
                     break;
+                }
+
+                this.bestSolution.CreatedFrom = null;
+
+                foreach (var ngh in neighbourhoods.Where(ngh => ngh.TotalCost > this.bestSolution.TotalCost))
+                {
+                    this.bestSolution = ngh;
+                }
+
+                if (this.bestSolution.CreatedFrom != null)
+                {
+                    if (this.tabu.Count >= this.tabuSize)
+                    {
+                        this.tabu.Dequeue();
+                    }
+
+                    this.tabu.Enqueue(this.bestSolution.CreatedFrom);
                 }
 
                 currentIteration += 1;
@@ -79,7 +97,84 @@
                 throw new ArgumentNullException("element");
             }
 
-            yield break;
+            var localNeighbourhoods = 0;
+
+            while (localNeighbourhoods < this.neighbourhoods)
+            {
+                localNeighbourhoods += 1;
+
+                var move = TabuMove.Next(this.configuration);
+                if (this.tabu.Contains(move))
+                {
+                    continue;
+                }
+
+                // swap;
+                var ngh = new TabuElement(element)
+                          {
+                              CreatedFrom = move
+                          };
+                ngh[move.Element] = ngh[move.Source];
+
+                yield return ngh;
+
+            }
+        }
+
+        private class TabuMove
+        {
+            private readonly int tabuElementIndex;
+            private readonly int sourceElementIndex;
+
+            private TabuMove(int tabuElementIndex, int sourceElementIndex)
+            {
+                this.tabuElementIndex = tabuElementIndex;
+                this.sourceElementIndex = sourceElementIndex;
+            }
+
+            public int Element
+            {
+                get { return this.tabuElementIndex; }
+            }
+
+            public int Source
+            {
+                get { return this.sourceElementIndex; }
+            }
+
+            public static TabuMove Next(KnapsackConfiguration configuration)
+            {
+                return new TabuMove(Random.Next(configuration.ItemsLength), Random.Next(configuration.ItemsLength));
+            }
+
+            private bool Equals(TabuMove other)
+            {
+                return this.sourceElementIndex == other.sourceElementIndex &&
+                       this.tabuElementIndex == other.tabuElementIndex;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(this, obj))
+                {
+                    return true;
+                }
+
+                return obj.GetType() == this.GetType() && this.Equals((TabuMove) obj);
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return (this.sourceElementIndex*397) ^ this.tabuElementIndex;
+                }
+            }
         }
 
         private class TabuElement
@@ -99,9 +194,20 @@
                 this.Randomize();
             }
 
+            public TabuElement(TabuElement element)
+            {
+                this.configuration = element.configuration;
+
+                this.itemsIncludedInKnapsack = new bool[this.configuration.ItemsLength];
+                element.itemsIncludedInKnapsack.CopyTo(this.itemsIncludedInKnapsack, 0);
+            }
+
+            public TabuMove CreatedFrom { get; set; }
+
             public bool this[int idx]
             {
                 get { return this.itemsIncludedInKnapsack[idx]; }
+                set { this.itemsIncludedInKnapsack[idx] = value; }
             }
 
             public void EnsureFitness()
