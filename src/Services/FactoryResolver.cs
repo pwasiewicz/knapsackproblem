@@ -1,8 +1,8 @@
 ﻿namespace KnapsackProblem.Services
 {
+    using KnapsackContract;
     using System.Collections.Generic;
     using System.Linq;
-    using KnapsackContract;
 
     public class FactoryResolver
     {

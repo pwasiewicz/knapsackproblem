@@ -1,6 +1,7 @@
 ﻿namespace KnapsackProblem
 {
     using CommandLine;
+    using KnapsackContract;
     using KnapsackProblem.Arguments;
     using KnapsackProblem.IoC;
     using KnapsackProblem.Services;
@@ -36,16 +37,7 @@
                     Environment.Exit(2);
                 }
 
-                var solver = solverFactory.Create(Console.Out, args);
-
-                var confReader = new KnapsackReader(programArgs.File);
-                var knapsackConfiguration = confReader.ReadConfiguration();
-
-                solver.Init(knapsackConfiguration);
-                var solution = solver.Solve();
-
-                var resultWriter = lifetimeScope.Resolve<ResultWriter>();
-                resultWriter.Write(Console.Out, solution);
+                RunProgram(lifetimeScope, solverFactory, programArgs, args);
             }
 
             if (programArgs.WaitForKey)
@@ -59,6 +51,22 @@
             var bld = new ContainerBuilder();
             IoCRegistration.Register(bld);
             return bld.Build();
+        }
+
+        private static void RunProgram(IResolvable lifetimeScope,
+                                       IKnapsackSolverFactory solverFactory, 
+                                       ProgramArgs programArgs,
+                                       params string[] args)
+        {
+            var knapsackConfiguration = new KnapsackReader(programArgs.File).ReadConfiguration();
+
+            var solver = solverFactory.Create(Console.Out, args);
+            solver.Init(knapsackConfiguration);
+
+            var solution = solver.Solve();
+
+            var resultWriter = lifetimeScope.Resolve<ResultWriter>();
+            resultWriter.Write(Console.Out, solution);
         }
 
         public static void WriteLine(string format, params object[] args)

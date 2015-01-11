@@ -1,8 +1,8 @@
 ﻿namespace KnapsackProblem.Services
 {
-    using System.IO;
     using KnapsackContract;
     using Newtonsoft.Json;
+    using System.IO;
 
     public class KnapsackReader
     {

@@ -1,7 +1,7 @@
 ﻿namespace KnapsackProblem.Services
 {
-    using System.IO;
     using KnapsackContract;
+    using System.IO;
 
     public class ResultWriter
     {
