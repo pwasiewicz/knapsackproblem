@@ -99,7 +99,10 @@
                 throw new ArgumentNullException("element");
             }
 
+            var possibleNeighbourhoods = this.neighbourhoods*1000;
+
             var localNeighbourhoods = 0;
+            var currentTry = 0;
 
             while (localNeighbourhoods < this.neighbourhoods)
             {
@@ -108,8 +111,16 @@
                 var move = TabuMove.Next(this.configuration);
                 if (this.tabu.Contains(move))
                 {
+                    currentTry += 1;
+                    if (currentTry >= possibleNeighbourhoods)
+                    {
+                        yield break;
+                    }
+
                     continue;
                 }
+
+                currentTry = 0;
 
                 // swap;
                 var ngh = new TabuElement(element)
