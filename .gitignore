@@ -23,9 +23,11 @@ bld/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+src/obj/*
+
 #NUNIT
 *.VisualState.xml
-TestResult.xml
+src/TestResult.xml
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
@@ -75,6 +77,7 @@ ipch/
 
 # TFS 2012 Local Workspace
 $tf/
+src/$tf/
 
 # Guidance Automation Toolkit
 *.gpState
@@ -104,19 +107,6 @@ AutoTest.Net/
 # Web workbench (sass)
 .sass-cache/
 
-# Installshield output folder
-[Ee]xpress/
-
-# DocProject is a documentation generator add-in
-DocProject/buildhelp/
-DocProject/Help/*.HxT
-DocProject/Help/*.HxC
-DocProject/Help/*.hhc
-DocProject/Help/*.hhk
-DocProject/Help/*.hhp
-DocProject/Help/Html2
-DocProject/Help/html
-
 # Click-Once directory
 publish/
 
@@ -129,7 +119,7 @@ publish/
 #*.pubxml
 
 # NuGet Packages Directory
-packages/*
+src/packages/*
 ## TODO: If the tool you use requires repositories.config
 ## uncomment the next line
 #!packages/repositories.config
@@ -138,7 +128,7 @@ packages/*
 # NuGet packages use it for MSBuild targets.
 # This line needs to be after the ignore of the build folder
 # (and the packages folder if the line above has been uncommented)
-!packages/build/
+!src/packages/build/
 
 # Windows Azure Build Output
 csx/
@@ -148,9 +138,9 @@ csx/
 AppPackages/
 
 # Others
-sql/
+$tf/sql/
 *.Cache
-ClientBin/
+$tf/ClientBin/
 [Ss]tyle[Cc]op.*
 ~$*
 *~
@@ -181,9 +171,9 @@ UpgradeLog*.htm
 *.bim_*.settings
 
 # Microsoft Fakes
-FakesAssemblies/
+$tf/FakesAssemblies/
 
 # LightSwitch generated files
-GeneratedArtifacts/
-_Pvt_Extensions/
-ModelManifest.xml
+$tf/GeneratedArtifacts/
+$tf/_Pvt_Extensions/
+$tf/ModelManifest.xml
