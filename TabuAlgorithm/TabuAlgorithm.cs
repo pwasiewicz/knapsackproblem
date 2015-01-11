@@ -1,5 +1,6 @@
 ﻿namespace TabuAlgorithm
 {
+    using global::TabuAlgorithm.Strategies;
     using KnapsackContract;
     using System;
     using System.Collections.Generic;
@@ -7,23 +8,44 @@
 
     public class TabuAlgorithm : IKnapsackSolver
     {
+        private const string DefaultStrategy = "swap";
+
         private readonly  static Random Random = new Random();
 
-        private Queue<TabuMove> tabu;
+        private readonly Queue<TabuMove> tabu;
+        private readonly SelectionStrategyGetter selectionStrategyGetter;
         private KnapsackConfiguration configuration;
         private TabuElement bestSolution;
 
         private readonly int tabuSize;
-        private readonly int neighbourhoods;
+        private readonly int neighbourhoodsCount;
         private readonly int maxIterations;
 
-        public TabuAlgorithm(int tabuSize, int maxIterations, int neighbourhoods)
+        private string strategy;
+
+        public TabuAlgorithm(int tabuSize, int maxIterations, int neighbourhoodsCount)
         {
             this.tabuSize = tabuSize;
             this.maxIterations = maxIterations;
-            this.neighbourhoods = neighbourhoods;
+            this.neighbourhoodsCount = neighbourhoodsCount;
 
             this.tabu = new Queue<TabuMove>(this.tabuSize);
+            this.selectionStrategyGetter = new SelectionStrategyGetter();
+            this.strategy = DefaultStrategy;
+        }
+
+        public string SelectionStrategy
+        {
+            private get { return this.strategy; }
+            set
+            {
+                if (!this.selectionStrategyGetter.HasStrategy(value))
+                {
+                    throw new InvalidOperationException("Invalid strategy name.");
+                }
+
+                this.strategy = value;
+            }
         }
 
         public void Init(KnapsackConfiguration conf)
@@ -99,12 +121,12 @@
                 throw new ArgumentNullException("element");
             }
 
-            var possibleNeighbourhoods = this.neighbourhoods*1000;
+            var possibleNeighbourhoods = this.neighbourhoodsCount * 1000;
 
             var localNeighbourhoods = 0;
             var currentTry = 0;
 
-            while (localNeighbourhoods < this.neighbourhoods)
+            while (localNeighbourhoods < this.neighbourhoodsCount)
             {
                 localNeighbourhoods += 1;
 
@@ -122,12 +144,13 @@
 
                 currentTry = 0;
 
-                // swap;
                 var ngh = new TabuElement(element)
                           {
                               CreatedFrom = move
                           };
-                ngh[move.Element] = ngh[move.Source];
+
+                this.selectionStrategyGetter[this.SelectionStrategy]
+                    .Select(ngh.IncludeInKnapsack, move.Element, move.Source);
 
                 yield return ngh;
 
@@ -220,7 +243,6 @@
             public bool this[int idx]
             {
                 get { return this.itemsIncludedInKnapsack[idx]; }
-                set { this.itemsIncludedInKnapsack[idx] = value; }
             }
 
             public void EnsureFitness()
@@ -259,19 +281,6 @@
             public bool[] IncludeInKnapsack
             {
                 get { return this.itemsIncludedInKnapsack; }
-            }
-
-            public int TotalWeight
-            {
-                get
-                {
-                    if (!this.lastTotalWeight.HasValue)
-                    {
-                        throw new InvalidOperationException("Fitness was not calculated yet.");
-                    }
-
-                    return this.lastTotalWeight.Value;
-                }
             }
 
             public int TotalCost

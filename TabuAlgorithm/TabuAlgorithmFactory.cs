@@ -1,7 +1,10 @@
 ﻿namespace TabuAlgorithm
 {
-    using System.IO;
+    using CommandLine;
+    using global::TabuAlgorithm.Arguments;
     using KnapsackContract;
+    using System;
+    using System.IO;
 
     public class TabuAlgorithmFactory : IKnapsackSolverFactory
     {
@@ -11,7 +14,27 @@
         }
         public IKnapsackSolver Create(TextWriter outWriter, params string[] args)
         {
-            return new TabuAlgorithm(10, 10, 10);
+            var options = new AlgArguments();
+
+            var parser = new Parser(cfg =>
+                                    {
+                                        cfg.HelpWriter = null;
+                                        cfg.IgnoreUnknownArguments = true;
+                                    });
+
+            parser.ParseArgumentsStrict(args, options, () =>
+                                                       {
+                                                           outWriter.WriteLine("Invalid arguments for tabu algorithm");
+                                                           Environment.Exit(4);
+                                                       });
+
+            return new TabuAlgorithm(options.TabuSize, options.Iterations, options.Neighbourhoods)
+                       {
+                           SelectionStrategy
+                               =
+                               options
+                               .Selection
+                       };
         }
     }
 }

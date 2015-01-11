@@ -42,9 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arguments\AlgArguments.cs" />
+    <Compile Include="Helpers\ArrayHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strategies\ISelectionStrategy.cs" />
+    <Compile Include="Strategies\SelectionStrategyGetter.cs" />
     <Compile Include="Strategies\Selection\CopySelectionStrategy.cs" />
+    <Compile Include="Strategies\Selection\ShiftSelectionStrategy.cs" />
     <Compile Include="Strategies\Selection\SwapSelectionStrategy.cs" />
     <Compile Include="TabuAlgorithm.cs" />
     <Compile Include="TabuAlgorithmFactory.cs" />
@@ -58,9 +62,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
