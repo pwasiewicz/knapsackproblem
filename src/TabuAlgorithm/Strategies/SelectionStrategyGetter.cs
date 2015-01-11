@@ -43,7 +43,7 @@
                         .GetTypes()
                         .Where(
                             type =>
-                            type.IsAssignableFrom(typeof (ISelectionStrategy)) && type.IsClass && !type.IsAbstract);
+                            typeof(ISelectionStrategy).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
             foreach (var instance in types.Select(type => (ISelectionStrategy) Activator.CreateInstance(type)))
             {

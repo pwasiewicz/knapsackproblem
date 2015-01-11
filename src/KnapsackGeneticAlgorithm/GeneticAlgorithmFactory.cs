@@ -18,7 +18,7 @@
             var algArgs = new AlgArguments();
             var parser = new Parser(cfg =>
                                     {
-                                        cfg.HelpWriter = null;
+                                        cfg.HelpWriter = outWriter;
                                         cfg.IgnoreUnknownArguments = true;
                                     });
 

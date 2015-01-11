@@ -10,7 +10,7 @@
         [Option('i', "iterations", DefaultValue = 1000)]
         public int Iterations { get; set; }
 
-        [Option('n', "neighbourhoods", DefaultValue = 0.1)]
+        [Option('n', "neighbourhoods", DefaultValue = 150)]
         public int Neighbourhoods { get; set; }
 
         [Option('s', "selection", DefaultValue = "swap")]

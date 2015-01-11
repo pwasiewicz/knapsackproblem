@@ -17,7 +17,7 @@
             var programArgs = new ProgramArgs();
             var parser = new Parser(settings =>
                                     {
-                                        settings.HelpWriter = null;
+                                        settings.HelpWriter = Console.Out;
                                         settings.IgnoreUnknownArguments = true;
                                     });
 
