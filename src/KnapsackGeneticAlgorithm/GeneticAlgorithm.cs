@@ -1,10 +1,10 @@
 ﻿namespace KnapsackGeneticAlgorithm
 {
+    using Crossovering.Crossovers;
     using KnapsackContract;
-    using KnapsackGeneticAlgorithm.Crossovering.Crossovers;
-    using KnapsackGeneticAlgorithm.Mutating;
-    using KnapsackGeneticAlgorithm.Mutating.Strategies;
-    using KnapsackGeneticAlgorithm.Selection.Strategies;
+    using Mutating;
+    using Mutating.Strategies;
+    using Selection.Strategies;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -92,7 +92,7 @@
                 {
                     var parents = selectionStrategy.NextParents();
                     var child = crossover.Crossover(parents.Item1, parents.Item2);
-                    
+
                     this.Mutate(mutationStrategy, child);
 
                     childPopulation.Add(child);
@@ -125,7 +125,7 @@
                     .OrderByDescending(group => group.Count())
                     .First();
 
-            var isEnd = (double) fitnesses.Count()/this.populationCount >= PercentageOfPopulationThatEndsSearching;
+            var isEnd = (double)fitnesses.Count() / this.populationCount >= PercentageOfPopulationThatEndsSearching;
             return isEnd ? fitnesses.First() : null;
         }
 

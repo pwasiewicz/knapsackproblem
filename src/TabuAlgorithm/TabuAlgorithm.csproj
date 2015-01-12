@@ -52,6 +52,8 @@
     <Compile Include="Strategies\Selection\SwapSelectionStrategy.cs" />
     <Compile Include="TabuAlgorithm.cs" />
     <Compile Include="TabuAlgorithmFactory.cs" />
+    <Compile Include="TabuElement.cs" />
+    <Compile Include="TabuMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KnapsackContract\KnapsackContract.csproj">

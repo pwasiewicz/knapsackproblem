@@ -1,10 +1,10 @@
 ﻿namespace KnapsackGeneticAlgorithm
 {
-    using System;
-    using System.IO;
+    using Arguments;
     using CommandLine;
     using KnapsackContract;
-    using KnapsackGeneticAlgorithm.Arguments;
+    using System;
+    using System.IO;
 
     public class GeneticAlgorithmFactory : IKnapsackSolverFactory
     {

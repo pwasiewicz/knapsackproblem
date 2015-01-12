@@ -9,13 +9,10 @@
         private static readonly Random RandomGenerator = new Random();
 
         private readonly int itemsSize;
-
         private readonly KnapsackConfiguration knapsackConfiguration;
-
         private readonly bool[] itemsIncludedInKnapsack;
 
         private int? lastTotalWeight;
-
         private int? lastTotalCost;
 
         public Chromosome(KnapsackConfiguration knapsackConfiguration)
@@ -33,7 +30,7 @@
             this.itemsSize = chromosome.itemsSize;
 
             this.itemsIncludedInKnapsack = new bool[chromosome.itemsIncludedInKnapsack.Length];
-            chromosome.itemsIncludedInKnapsack.CopyTo(this.itemsIncludedInKnapsack,0);
+            chromosome.itemsIncludedInKnapsack.CopyTo(this.itemsIncludedInKnapsack, 0);
         }
 
         public bool[] Items
@@ -92,7 +89,7 @@
 
                 var choosenItems =
                     this.itemsIncludedInKnapsack.Select(
-                        (inKnapsack, index) => new {IsIncluded = inKnapsack, Index = index})
+                        (inKnapsack, index) => new { IsIncluded = inKnapsack, Index = index })
                         .Where(item => item.IsIncluded).Select(item => item.Index).ToArray();
 
                 var indexToExclude = RandomGenerator.Next(0, choosenItems.Length);

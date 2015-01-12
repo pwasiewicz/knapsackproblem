@@ -1,7 +1,9 @@
 ﻿namespace KnapsackProblem.Services
 {
+    using Exceptions;
     using KnapsackContract;
     using Newtonsoft.Json;
+    using System;
     using System.IO;
 
     public class KnapsackReader
@@ -15,10 +17,17 @@
 
         public KnapsackConfiguration ReadConfiguration()
         {
-            using (var streamReader = new StreamReader(this.file))
+            try
             {
-                var text = streamReader.ReadToEnd();
-                return JsonConvert.DeserializeObject<KnapsackConfiguration>(text);
+                using (var streamReader = new StreamReader(this.file))
+                {
+                    var text = streamReader.ReadToEnd();
+                    return JsonConvert.DeserializeObject<KnapsackConfiguration>(text);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ReadingConfigurationException(ex.Message, ex);
             }
         }
     }

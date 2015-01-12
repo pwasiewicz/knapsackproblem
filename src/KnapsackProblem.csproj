@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguments\ProgramArgs.cs" />
+    <Compile Include="Exceptions\ReadingConfigurationException.cs" />
     <Compile Include="IoC\IoCRegistration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

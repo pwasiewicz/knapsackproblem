@@ -1,7 +1,7 @@
 ﻿namespace TabuAlgorithm
 {
+    using Arguments;
     using CommandLine;
-    using global::TabuAlgorithm.Arguments;
     using KnapsackContract;
     using System;
     using System.IO;

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exception\AlgorithmInitializationException.cs" />
     <Compile Include="IKnapsackSolver.cs" />
     <Compile Include="IKnapsackSolverFactory.cs" />
     <Compile Include="KnapsackConfiguration.cs" />
