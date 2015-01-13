@@ -60,9 +60,11 @@
     <Compile Include="Services\FactoryResolver.cs" />
     <Compile Include="Services\IFactoryResolver.cs" />
     <Compile Include="Services\IKnapsackReader.cs" />
+    <Compile Include="Services\IProgramImpl.cs" />
     <Compile Include="Services\IResultWriter.cs" />
     <Compile Include="Services\IStopwatch.cs" />
     <Compile Include="Services\KnapsackReader.cs" />
+    <Compile Include="Services\ProgramImpl.cs" />
     <Compile Include="Services\Stopwatch.cs" />
     <Compile Include="Services\ResultWriter.cs" />
   </ItemGroup>

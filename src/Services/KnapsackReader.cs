@@ -15,7 +15,7 @@
             this.file = file;
         }
 
-        public KnapsackConfiguration[] ReadConfiguration()
+        public KnapsackConfiguration[] ReadConfigurations()
         {
             try
             {

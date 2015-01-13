@@ -4,6 +4,6 @@
 
     public interface IKnapsackReader
     {
-        KnapsackConfiguration[] ReadConfiguration();
+        KnapsackConfiguration[] ReadConfigurations();
     }
 }

@@ -2,10 +2,7 @@
 {
     using Arguments;
     using CommandLine;
-    using Exceptions;
     using IoC;
-    using KnapsackContract;
-    using KnapsackContract.Exception;
     using MiniAutFac;
     using MiniAutFac.Interfaces;
     using Services;
@@ -32,7 +29,7 @@
                                                                Environment.Exit(InvalidArgumentsCode);
                                                            });
 
-            using (var lifetimeScope = BuildContainer(args))
+            using (var lifetimeScope = BuildContainer(args, programArgs))
             {
                 var factoryResolver = lifetimeScope.Resolve<IFactoryResolver>();
                 var solverFactory = factoryResolver.GetFactory(programArgs.AlgorithmName);
@@ -42,7 +39,8 @@
                     Environment.Exit(InvalidAlgorithmCode);
                 }
 
-                RunProgram(lifetimeScope, solverFactory, programArgs, args);
+                var programImpl = lifetimeScope.Resolve<IProgramImpl>();
+                programImpl.Run(solverFactory);
             }
 
             if (programArgs.WaitForKey)
@@ -51,50 +49,10 @@
             }
         }
 
-        private static ILifetimeScope BuildContainer(string[] programArgs)
+        private static ILifetimeScope BuildContainer(string[] programArgs, ProgramArgs programArgsParsed)
         {
             var bld = new ContainerBuilder();
-            return IoCRegistration.Register(bld, programArgs).Build();
-        }
-
-        private static void RunProgram(IResolvable lifetimeScope,
-                                       IKnapsackSolverFactory solverFactory,
-                                       ProgramArgs programArgs,
-                                       params string[] args)
-        {
-            KnapsackConfiguration[] knapsackConfigurations;
-
-            try
-            {
-                knapsackConfigurations = new KnapsackReader(programArgs.File).ReadConfiguration();
-            }
-            catch (ReadingConfigurationException ex)
-            {
-                WriteLine("An error occured while reading knapsack items and knapsack configuration: {0}", ex.Message);
-                return;
-            }
-
-            var resultWriter = lifetimeScope.Resolve<IResultWriter>();
-
-            foreach (var configuration in knapsackConfigurations)
-            {
-
-                try
-                {
-                    var solver = solverFactory.Create(OutWriter, args);
-                    solver.Init(configuration);
-
-                    var solution = solver.Solve();
-                    resultWriter.Write(OutWriter, solution);
-                }
-                catch (AlgorithmInitializationException ex)
-                {
-                    if (!ex.CustomOutput)
-                    {
-                        WriteLine("An error occured while initializing algorithm: {0}", ex.Message);
-                    }
-                }
-            }
+            return IoCRegistration.Register(bld, programArgs, programArgsParsed).Build();
         }
 
         public static TextWriter OutWriter

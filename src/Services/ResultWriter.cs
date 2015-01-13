@@ -5,12 +5,20 @@
 
     public class ResultWriter : IResultWriter
     {
-        public void Write(TextWriter outWriter, KnapsackItem[] items)
+        private readonly TextWriter outWriter;
+
+        public ResultWriter(TextWriter outWriter)
+        {
+            this.outWriter = outWriter;
+        }
+
+        public void Write(int currentCase, KnapsackItem[] items, IStopwatch watcher)
         {
             var totalWeight = 0;
             var totalCost = 0;
 
-            outWriter.WriteLine("Result:");
+            outWriter.WriteLine("=====");
+            outWriter.WriteLine("Result of case {0}:", currentCase);
 
             foreach (var item in items)
             {
@@ -23,6 +31,7 @@
             outWriter.WriteLine();
             outWriter.WriteLine("Total cost: {0}", totalCost);
             outWriter.WriteLine("Total weight: {0}", totalWeight);
+            outWriter.WriteLine("Total time {0}", watcher);
         }
     }
 }

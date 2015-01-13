@@ -1,10 +1,9 @@
 namespace KnapsackProblem.Services
 {
-    using System.IO;
     using KnapsackContract;
 
     public interface IResultWriter
     {
-        void Write(TextWriter outWriter, KnapsackItem[] items);
+        void Write(int currentCase, KnapsackItem[] items, IStopwatch watcher);
     }
 }

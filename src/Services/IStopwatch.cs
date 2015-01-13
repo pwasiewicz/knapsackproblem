@@ -1,6 +1,6 @@
 namespace KnapsackProblem.Services
 {
-    internal interface IStopwatch
+    public interface IStopwatch
     {
         void Start();
         void Stop();
