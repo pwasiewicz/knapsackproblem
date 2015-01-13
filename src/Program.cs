@@ -32,9 +32,9 @@
                                                                Environment.Exit(InvalidArgumentsCode);
                                                            });
 
-            using (var lifetimeScope = BuildContainer())
+            using (var lifetimeScope = BuildContainer(args))
             {
-                var factoryResolver = lifetimeScope.Resolve<FactoryResolver>();
+                var factoryResolver = lifetimeScope.Resolve<IFactoryResolver>();
                 var solverFactory = factoryResolver.GetFactory(programArgs.AlgorithmName);
                 if (solverFactory == null)
                 {
@@ -51,10 +51,10 @@
             }
         }
 
-        private static ILifetimeScope BuildContainer()
+        private static ILifetimeScope BuildContainer(string[] programArgs)
         {
             var bld = new ContainerBuilder();
-            return IoCRegistration.Register(bld).Build();
+            return IoCRegistration.Register(bld, programArgs).Build();
         }
 
         private static void RunProgram(IResolvable lifetimeScope,
@@ -62,11 +62,11 @@
                                        ProgramArgs programArgs,
                                        params string[] args)
         {
-            KnapsackConfiguration knapsackConfiguration;
+            KnapsackConfiguration[] knapsackConfigurations;
 
             try
             {
-                knapsackConfiguration = new KnapsackReader(programArgs.File).ReadConfiguration();
+                knapsackConfigurations = new KnapsackReader(programArgs.File).ReadConfiguration();
             }
             catch (ReadingConfigurationException ex)
             {
@@ -74,21 +74,25 @@
                 return;
             }
 
-            var resultWriter = lifetimeScope.Resolve<ResultWriter>();
+            var resultWriter = lifetimeScope.Resolve<IResultWriter>();
 
-            try
+            foreach (var configuration in knapsackConfigurations)
             {
-                var solver = solverFactory.Create(OutWriter, args);
-                solver.Init(knapsackConfiguration);
 
-                var solution = solver.Solve();
-                resultWriter.Write(OutWriter, solution);
-            }
-            catch (AlgorithmInitializationException ex)
-            {
-                if (!ex.CustomOutput)
+                try
                 {
-                    WriteLine("An error occured while initializing algorithm: {0}", ex.Message);
+                    var solver = solverFactory.Create(OutWriter, args);
+                    solver.Init(configuration);
+
+                    var solution = solver.Solve();
+                    resultWriter.Write(OutWriter, solution);
+                }
+                catch (AlgorithmInitializationException ex)
+                {
+                    if (!ex.CustomOutput)
+                    {
+                        WriteLine("An error occured while initializing algorithm: {0}", ex.Message);
+                    }
                 }
             }
         }

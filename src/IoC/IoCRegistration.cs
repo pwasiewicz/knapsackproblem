@@ -8,7 +8,7 @@
 
     internal class IoCRegistration
     {
-        public static ContainerBuilder Register(ContainerBuilder cntBld)
+        public static ContainerBuilder Register(ContainerBuilder cntBld, string[] programArgs)
         {
             cntBld.Register<TabuAlgorithmFactory>()
                   .As<IKnapsackSolverFactory>()
@@ -18,8 +18,11 @@
                   .As<IKnapsackSolverFactory>()
                   .PerLifetimeScope();
 
-            cntBld.Register<FactoryResolver>().PerLifetimeScope();
-            cntBld.Register<ResultWriter>().PerLifetimeScope();
+            cntBld.Register<FactoryResolver>().As<IFactoryResolver>().PerLifetimeScope();
+            cntBld.Register<ResultWriter>().As<IResultWriter>().PerLifetimeScope();
+            cntBld.Register<Stopwatch>().As<IStopwatch>().PerDependency();
+
+            cntBld.Register<string[]>().As(programArgs);
 
             return cntBld;
         }

@@ -58,7 +58,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FactoryResolver.cs" />
+    <Compile Include="Services\IFactoryResolver.cs" />
+    <Compile Include="Services\IKnapsackReader.cs" />
+    <Compile Include="Services\IResultWriter.cs" />
+    <Compile Include="Services\IStopwatch.cs" />
     <Compile Include="Services\KnapsackReader.cs" />
+    <Compile Include="Services\Stopwatch.cs" />
     <Compile Include="Services\ResultWriter.cs" />
   </ItemGroup>
   <ItemGroup>

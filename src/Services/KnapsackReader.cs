@@ -6,7 +6,7 @@
     using System;
     using System.IO;
 
-    public class KnapsackReader
+    public class KnapsackReader : IKnapsackReader
     {
         private readonly string file;
 
@@ -15,14 +15,14 @@
             this.file = file;
         }
 
-        public KnapsackConfiguration ReadConfiguration()
+        public KnapsackConfiguration[] ReadConfiguration()
         {
             try
             {
                 using (var streamReader = new StreamReader(this.file))
                 {
                     var text = streamReader.ReadToEnd();
-                    return JsonConvert.DeserializeObject<KnapsackConfiguration>(text);
+                    return JsonConvert.DeserializeObject<KnapsackConfiguration[]>(text);
                 }
             }
             catch (Exception ex)

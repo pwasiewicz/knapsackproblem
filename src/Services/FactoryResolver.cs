@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class FactoryResolver
+    public class FactoryResolver : IFactoryResolver
     {
         private readonly IEnumerable<IKnapsackSolverFactory> factories;
 
