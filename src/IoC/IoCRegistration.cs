@@ -2,8 +2,8 @@
 {
     using KnapsackContract;
     using KnapsackGeneticAlgorithm;
-    using KnapsackProblem.Services;
     using MiniAutFac;
+    using Services;
     using TabuAlgorithm;
 
     internal class IoCRegistration

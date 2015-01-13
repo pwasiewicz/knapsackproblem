@@ -1,14 +1,14 @@
 ﻿namespace KnapsackProblem
 {
+    using Arguments;
     using CommandLine;
     using Exceptions;
+    using IoC;
     using KnapsackContract;
     using KnapsackContract.Exception;
-    using KnapsackProblem.Arguments;
-    using KnapsackProblem.IoC;
-    using KnapsackProblem.Services;
     using MiniAutFac;
     using MiniAutFac.Interfaces;
+    using Services;
     using System;
     using System.IO;
 
@@ -53,7 +53,7 @@
 
         private static ILifetimeScope BuildContainer()
         {
-            var bld = new ContainerBuilder(); ;
+            var bld = new ContainerBuilder();
             return IoCRegistration.Register(bld).Build();
         }
 

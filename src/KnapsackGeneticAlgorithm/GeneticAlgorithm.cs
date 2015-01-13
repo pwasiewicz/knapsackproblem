@@ -12,6 +12,7 @@
     public class GeneticAlgorithm : IKnapsackSolver
     {
         private const float PercentageOfPopulationThatEndsSearching = 0.9f;
+        private const int ElitismNo = 2;
 
         private static readonly Random RandomGenerator = new Random();
 
@@ -140,7 +141,7 @@
         private void PerformElitism(List<Chromosome> target)
         {
             var ordered = this.currentPopulation.OrderByDescending(chr => chr.TotalCost);
-            target.AddRange(ordered.Take(2));
+            target.AddRange(ordered.Take(ElitismNo));
         }
 
         private void Mutate(IMutationStrategy mutationStrategy, Chromosome chromosome)
