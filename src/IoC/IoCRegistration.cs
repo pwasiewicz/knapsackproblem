@@ -30,7 +30,6 @@
                   .PerLifetimeScope()
                   .WithNamedParameter("file", programArgsParsed.File);
 
-            cntBld.Register<ILifetimeScope>().As(ctx => ctx.CurrentLifetimeScope).PerDependency();
             cntBld.Register<TextWriter>().As(Console.Out).SingleInstance();
             cntBld.Register<ProgramImpl>().As<IProgramImpl>().PerLifetimeScope();
 

@@ -4,22 +4,18 @@
     using Exceptions;
     using KnapsackContract;
     using KnapsackContract.Exception;
-    using MiniAutFac;
-    using MiniAutFac.Interfaces;
 
     internal class ProgramImpl : IProgramImpl
     {
-        private readonly ILifetimeScope currentLifetimeScope;
         private readonly string[] programArgs;
         private readonly IResultWriter resultWriter;
         private readonly TextWriter outWriter;
         private readonly IKnapsackReader knapsackReader;
 
 
-        public ProgramImpl(ILifetimeScope currentLifetimeScope, string[] programArgs, IResultWriter resultWriter,
+        public ProgramImpl(string[] programArgs, IResultWriter resultWriter,
                            TextWriter outWriter, IKnapsackReader knapsackReader)
         {
-            this.currentLifetimeScope = currentLifetimeScope;
             this.programArgs = programArgs;
             this.resultWriter = resultWriter;
             this.outWriter = outWriter;
@@ -48,7 +44,7 @@
             {
                 try
                 {
-                    var watcher = this.currentLifetimeScope.Resolve<IStopwatch>();
+                    var watcher = new Stopwatch();
                     var solver = solverFactory.Create(this.outWriter, this.programArgs);
 
                     watcher.Start();
