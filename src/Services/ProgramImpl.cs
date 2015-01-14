@@ -1,9 +1,9 @@
 ﻿namespace KnapsackProblem.Services
 {
-    using System.IO;
     using Exceptions;
     using KnapsackContract;
     using KnapsackContract.Exception;
+    using System.IO;
 
     internal class ProgramImpl : IProgramImpl
     {

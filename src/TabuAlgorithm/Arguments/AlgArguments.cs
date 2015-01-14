@@ -4,13 +4,13 @@
 
     internal class AlgArguments
     {
-        [Option('t', "tabu", DefaultValue = 100)]
+        [Option('t', "tabu", DefaultValue = 150)]
         public int TabuSize { get; set; }
 
-        [Option('i', "iterations", DefaultValue = 1000)]
+        [Option('i', "iterations", DefaultValue = 3000)]
         public int Iterations { get; set; }
 
-        [Option('n', "neighbourhoods", DefaultValue = 150)]
+        [Option('n', "neighbourhoods", DefaultValue = 200)]
         public int Neighbourhoods { get; set; }
 
         [Option('s', "selection", DefaultValue = "swap")]

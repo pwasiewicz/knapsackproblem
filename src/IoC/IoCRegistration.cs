@@ -1,14 +1,13 @@
 ﻿namespace KnapsackProblem.IoC
 {
-    using System;
-    using System.IO;
-    using System.Text;
     using Arguments;
     using KnapsackContract;
     using KnapsackGeneticAlgorithm;
     using MiniAutFac;
-    using MiniAutFac.Interfaces;
     using Services;
+    using System;
+    using System.IO;
+    using System.Text;
     using TabuAlgorithm;
 
     internal class IoCRegistration
