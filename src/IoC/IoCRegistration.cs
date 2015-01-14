@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Text;
     using Arguments;
     using KnapsackContract;
     using KnapsackGeneticAlgorithm;
@@ -30,12 +31,21 @@
                   .PerLifetimeScope()
                   .WithNamedParameter("file", programArgsParsed.File);
 
-            cntBld.Register<TextWriter>().As(Console.Out).SingleInstance();
+            //small hack for MiniAutFac bug
+            cntBld.Register<WriterStub>().As<TextWriter>().As(Console.Out).SingleInstance();
             cntBld.Register<ProgramImpl>().As<IProgramImpl>().PerLifetimeScope();
 
             cntBld.Register<string[]>().As(programArgs);
 
             return cntBld;
+        }
+
+        internal class WriterStub : TextWriter
+        {
+            public override Encoding Encoding
+            {
+                get { throw new NotImplementedException(); }
+            }
         }
     }
 }
