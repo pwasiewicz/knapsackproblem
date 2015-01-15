@@ -12,5 +12,8 @@
 
         [Option('f', "file", Required = true, HelpText = "File with possible knapsack items configuration.")]
         public string File { get; set; }
+
+        [Option('s', "shortened", DefaultValue = false)]
+        public bool ShortenedOutput { get; set; }
     }
 }

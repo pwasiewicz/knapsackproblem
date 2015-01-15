@@ -30,6 +30,8 @@
                   .PerLifetimeScope()
                   .WithNamedParameter("file", programArgsParsed.File);
 
+            cntBld.Register<ProgramArgs>().As(programArgs).SingleInstance();
+
             //small hack for MiniAutFac bug
             cntBld.Register<WriterStub>().As<TextWriter>().As(Console.Out).SingleInstance();
             cntBld.Register<ProgramImpl>().As<IProgramImpl>().PerLifetimeScope();
