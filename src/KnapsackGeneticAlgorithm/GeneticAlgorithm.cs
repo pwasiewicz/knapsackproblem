@@ -19,11 +19,12 @@
         private readonly int maxGenerations;
         private readonly int populationCount;
         private readonly double mutationProbability;
+        private readonly bool force;
         private KnapsackConfiguration configuration;
 
         private List<Chromosome> currentPopulation;
 
-        public GeneticAlgorithm(int maxGenerations, int populationCount, double mutationProbability)
+        public GeneticAlgorithm(int maxGenerations, int populationCount, double mutationProbability, bool force)
         {
             if (mutationProbability < 0.01)
             {
@@ -38,6 +39,7 @@
             this.maxGenerations = maxGenerations;
             this.populationCount = populationCount;
             this.mutationProbability = mutationProbability;
+            this.force = force;
         }
 
         public void Init(KnapsackConfiguration conf)
@@ -100,7 +102,7 @@
                 }
 
                 populatingEnd = currentGeneration > this.maxGenerations
-                                            || (result = this.FitnessesEnough()) != null;
+                                || (!this.force && ((result = this.FitnessesEnough()) != null));
                 if (populatingEnd)
                 {
                     continue;

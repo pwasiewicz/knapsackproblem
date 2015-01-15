@@ -11,7 +11,7 @@
         [TestMethod]
         public void TestMethod1()
         {
-            var testMethod = new GeneticAlgorithm(10000, 30, 0.1);
+            var testMethod = new GeneticAlgorithm(10000, 30, 0.1, false);
 
             testMethod.Init(new KnapsackConfiguration(new[]
                                                       {

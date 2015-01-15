@@ -29,7 +29,7 @@
                                                        });
 
 
-            return new GeneticAlgorithm(algArgs.Generations, algArgs.Population, algArgs.MutationProbability);
+            return new GeneticAlgorithm(algArgs.Generations, algArgs.Population, algArgs.MutationProbability, algArgs.ForceAllGenerations);
         }
     }
 }
