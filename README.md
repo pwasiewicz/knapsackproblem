@@ -94,3 +94,8 @@ Sample tabu search algorithm implementation (name: **tabu**) with additional arg
 -s, --selection         (Default: swap) Selection algorithm name.
 ```
 Currently, there are three selection algorthms to use: **copy**, **swap** and **shift**.
+
+## Sample usage
+```
+C:\Knapsack\Bin>KnapsackProblem.exe --shortened -f tests/small.txt -a tabu -i 100 -n 100
+```
