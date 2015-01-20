@@ -99,3 +99,26 @@ Currently, there are three selection algorthms to use: **copy**, **swap** and **
 ```
 C:\Knapsack\Bin>KnapsackProblem.exe --shortened -f tests/small.txt -a tabu -i 100 -n 100
 ```
+Result
+```
+=====
+Result of case 1: 0 in 0:00:00:00,0092364 ms
+=====
+Result of case 2: 0 in 0:00:00:00,0030354 ms
+=====
+Result of case 3: 200 in 0:00:00:00,0043843 ms
+=====
+Result of case 4: 345 in 0:00:00:00,0032112 ms
+=====
+Result of case 5: 1010 in 0:00:00:00,0033472 ms
+=====
+Result of case 6: 65536 in 0:00:00:00,0031518 ms
+=====
+Result of case 7: 0 in 0:00:00:00,0028661 ms
+=====
+Result of case 8: 64512 in 0:00:00:00,0046986 ms
+=====
+Result of case 9: 4096 in 0:00:00:00,0034032 ms
+=====
+Result of case 10: 8 in 0:00:00:00,0033318 ms
+```
